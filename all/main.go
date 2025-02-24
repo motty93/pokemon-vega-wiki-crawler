@@ -9,12 +9,13 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
+var (
+	allUrl = "https://w.atwiki.jp/altair1/pages/19.html" // ポケモン図鑑のURL
+)
+
 // 図鑑リストを作成する
 func main() {
-	// ポケモン図鑑のURL
-	url := "https://w.atwiki.jp/altair1/pages/19.html"
-
-	res, err := http.Get(url)
+	res, err := http.Get(allUrl)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -30,7 +31,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("取得したカラム名:")
 	doc.Find("table tbody tr").Each(func(i int, row *goquery.Selection) {
 		row.Find("td").Each(func(j int, cell *goquery.Selection) {
 			text := strings.TrimSpace(cell.Text()) // No.を取得
