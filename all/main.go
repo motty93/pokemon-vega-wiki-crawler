@@ -33,12 +33,9 @@ func main() {
 	fmt.Println("取得したカラム名:")
 	doc.Find("table tbody tr").Each(func(i int, row *goquery.Selection) {
 		row.Find("td").Each(func(j int, cell *goquery.Selection) {
-			// No.を取得
-			text := strings.TrimSpace(cell.Text())
-			// <a>タグを取得
-			link := cell.Find("a")
+			text := strings.TrimSpace(cell.Text()) // No.を取得
+			link := cell.Find("a")                 // <a>タグを取得
 			href, exists := link.Attr("href")
-
 			if text == "No." || text == "名前" || text == "" {
 				return
 			}
